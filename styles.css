@@ -104,7 +104,8 @@ head {
   align-content: center;
   margin-top: 20px;
 }
-.product-card {
+.product-card,
+.dblock {
   display: flex;
   contain: content;
   flex-direction: column;
@@ -202,7 +203,4 @@ footer {
 }
 .dnone {
   display: none;
-}
-.dblock {
-  display: flex;
 }

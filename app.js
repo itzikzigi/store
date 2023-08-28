@@ -95,7 +95,7 @@ const createImageDiv = (card, image, alt) => {
 
 const createCard = (tab, obj) => {
   const cardDiv = createElement("div", obj.category, obj.id);
-  cardDiv.className = `${obj.category} product-card`;
+  cardDiv.className = `${obj.category} product-card dblock`;
   tab.appendChild(cardDiv);
   createImageDiv(cardDiv, obj.image, obj.title);
   createCardTitle(cardDiv, obj.title);
@@ -144,7 +144,7 @@ const createNavbar = (main) => {
     "button",
     "filter-buttons",
     "women's clothing",
-    "women's clothing"
+    "woman's clothing"
   );
   navButtonsDiv.appendChild(womenFilterButton);
 
@@ -232,7 +232,7 @@ const filterFn = (button) => {
         !el.className.includes(button.id) &&
         !el.className.includes("dnone")
       ) {
-        el.className = `${el.classList} dnone`;
+        el.className = el.className.replace("dblock", "dnone");
       }
     }
   }
