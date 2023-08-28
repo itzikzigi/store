@@ -1,4 +1,4 @@
-const allProductsUrl = "https://store-project-0q4y.onrender.com";
+const allProductsUrl = "https://store-project-0q4y.onrender.com/api/products";
 
 const reqData = async (url) => await fetch(url);
 
