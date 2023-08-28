@@ -218,18 +218,29 @@ const filterEvent = () => {
 
 const filterFn = (button) => {
   let temp = cards.children;
-  if (button.id !== "All-products") {
+  if (button.id !== "all-products") {
     for (el of temp) {
-      console.log(el);
-      if (el.className.includes(button.id)) {
-        el.className = "dnone";
+      if (
+        el.className.includes(button.id) &&
+        el.className.includes("dnone") &&
+        !el.className.includes("dblock")
+      ) {
+        el.className = el.className.replace("dnone", "dblock");
+      }
+
+      if (
+        !el.className.includes(button.id) &&
+        !el.className.includes("dnone")
+      ) {
+        el.className = `${el.classList} dnone`;
       }
     }
   }
-  if (button.id === "All-products") {
+  if (button.id == "all-products") {
     for (el of temp) {
-      if (el.className === "dnone") {
-        location.reload();
+      if (el.className.includes("dnone") && !el.className.includes("dblock")) {
+        el.className = el.className.replace("dnone", "dblock");
+        console.log(el.className);
       }
     }
   }
