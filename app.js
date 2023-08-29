@@ -39,7 +39,7 @@ const createCardBottomButtons = (card) => {
   const deleteButton = createElement(
     "button",
     "small material-icons del",
-    null,
+    card.id,
     "delete"
   );
   cardBottomButtonsCont.appendChild(deleteButton);
@@ -56,7 +56,7 @@ const createCardBottomButtons = (card) => {
 };
 
 const createCardMiddleButtons = (card, obj) => {
-  const middleButtonsCont = createElement("div", "middleCardButtons");
+  const middleButtonsCont = createElement("div", "middleCardButtons", obj.id);
   card.appendChild(middleButtonsCont);
 
   const add1Button = createElement("button", "add1-button", obj.id, "+1");
@@ -208,7 +208,6 @@ const changeQuantity = () => {
 };
 changeQuantity();
 
-
 const filterEvent = () => {
   addEventListener("click", (e) => {
     if (e.target.className.includes("filter-buttons"))
@@ -240,7 +239,6 @@ const filterFn = (button) => {
     for (el of temp) {
       if (el.className.includes("dnone") && !el.className.includes("dblock")) {
         el.className = el.className.replace("dnone", "dblock");
-        console.log(el.className);
       }
     }
   }
@@ -264,3 +262,17 @@ const searchFunc = () => {
   }
 };
 searchEvent();
+
+const deleteEvent = () => {
+  addEventListener("click", async (e) => {
+    if (e.target.className.includes("del")) {
+      console.log("delete");
+      let s = await sendData(
+        `${allProductsUrl}/${e.target.id}/delete`,
+        "DELETE"
+      );
+      cards.removeChild(document.getElementById(e.target.id));
+    }
+  });
+};
+deleteEvent();
