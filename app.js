@@ -195,19 +195,6 @@ const homePageLoad = async (main) => {
 homePageLoad(main);
 const cards = document.getElementById("cards-cont");
 
-// const changeQuantity = () => {
-//   addEventListener("click", (e) => {
-//     if (e.target.className.includes("add1-button")) {
-//       return sendData(`${allProductsUrl}/${e.target.id}/+`, "PUT");
-//     }
-
-//     if (e.target.className.includes("reduce1-button")) {
-//       return sendData(`${allProductsUrl}/${e.target.id}/-`, "PUT");
-//     }
-//   });
-// };
-// changeQuantity();
-
 const filterEvent = () => {
   addEventListener("click", (e) => {
     if (e.target.className.includes("filter-buttons"))
