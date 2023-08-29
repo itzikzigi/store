@@ -1,14 +1,6 @@
+const { reqData, getData } = require("./fetch");
 const allProductsUrl = "http://localhost:8000/api/products";
-
-const reqData = async (url) => await fetch(url);
-
-const sendData = async (url, method) => await fetch(url, { method: method });
-
-const getData = async (reqData) => {
-  let res = await reqData;
-  let js = await res.json();
-  return js;
-};
+const HOME_PAGE = document.getElementById("home");
 
 const createElement = (
   type = "div",
@@ -22,8 +14,6 @@ const createElement = (
   element.innerText = text;
   return element;
 };
-
-const HOME_PAGE = document.getElementById("home");
 
 const main = createElement("div", "main");
 HOME_PAGE.appendChild(main);
@@ -144,7 +134,7 @@ const createNavbar = (main) => {
     "button",
     "filter-buttons",
     "women's clothing",
-    "women's clothing"
+    "woman's clothing"
   );
   navButtonsDiv.appendChild(womenFilterButton);
 
@@ -193,74 +183,5 @@ const homePageLoad = async (main) => {
 };
 
 homePageLoad(main);
-const cards = document.getElementById("cards-cont");
 
-const changeQuantity = () => {
-  addEventListener("click", (e) => {
-    if (e.target.className.includes("add1-button")) {
-      return sendData(`${allProductsUrl}/${e.target.id}/+`, "PUT");
-    }
-
-    if (e.target.className.includes("reduce1-button")) {
-      return sendData(`${allProductsUrl}/${e.target.id}/-`, "PUT");
-    }
-  });
-};
-changeQuantity();
-
-
-const filterEvent = () => {
-  addEventListener("click", (e) => {
-    if (e.target.className.includes("filter-buttons"))
-      return filterFn(e.target);
-  });
-};
-
-const filterFn = (button) => {
-  let temp = cards.children;
-  if (button.id !== "all-products") {
-    for (el of temp) {
-      if (
-        el.className.includes(button.id) &&
-        el.className.includes("dnone") &&
-        !el.className.includes("dblock")
-      ) {
-        el.className = el.className.replace("dnone", "dblock");
-      }
-
-      if (
-        !el.className.includes(button.id) &&
-        !el.className.includes("dnone")
-      ) {
-        el.className = el.className.replace("dblock", "dnone");
-      }
-    }
-  }
-  if (button.id == "all-products") {
-    for (el of temp) {
-      if (el.className.includes("dnone") && !el.className.includes("dblock")) {
-        el.className = el.className.replace("dnone", "dblock");
-        console.log(el.className);
-      }
-    }
-  }
-};
-filterEvent();
-
-const searchEvent = () => {
-  addEventListener("click", (e) => {
-    if (e.target.id === "searchButton") {
-      return searchFunc();
-    }
-  });
-};
-const searchFunc = () => {
-  const inputEL = document.getElementById("searchInput");
-  for (el of cards.children) {
-    el.className = el.className.replace("dnone", "dblock");
-    if (!el.innerText.toLowerCase().includes(inputEL.value)) {
-      el.classList = el.className.replace("dblock", "dnone");
-    }
-  }
-};
-searchEvent();
+module.export = { homePageLoad, main };
