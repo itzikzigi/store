@@ -72,7 +72,7 @@ const createCardMiddleButtons = (card, obj) => {
 
   const reduce1Button = createElement("button", "reduce1-button", obj.id, "-1");
   middleButtonsCont.appendChild(reduce1Button);
-
+  changeQuantity(middleButtonsCont, quantityTag);
   return middleButtonsCont;
 };
 
@@ -195,18 +195,18 @@ const homePageLoad = async (main) => {
 homePageLoad(main);
 const cards = document.getElementById("cards-cont");
 
-const changeQuantity = () => {
-  addEventListener("click", (e) => {
-    if (e.target.className.includes("add1-button")) {
-      return sendData(`${allProductsUrl}/${e.target.id}/+`, "PUT");
-    }
+// const changeQuantity = () => {
+//   addEventListener("click", (e) => {
+//     if (e.target.className.includes("add1-button")) {
+//       return sendData(`${allProductsUrl}/${e.target.id}/+`, "PUT");
+//     }
 
-    if (e.target.className.includes("reduce1-button")) {
-      return sendData(`${allProductsUrl}/${e.target.id}/-`, "PUT");
-    }
-  });
-};
-changeQuantity();
+//     if (e.target.className.includes("reduce1-button")) {
+//       return sendData(`${allProductsUrl}/${e.target.id}/-`, "PUT");
+//     }
+//   });
+// };
+// changeQuantity();
 
 const filterEvent = () => {
   addEventListener("click", (e) => {
@@ -276,3 +276,18 @@ const deleteEvent = () => {
   });
 };
 deleteEvent();
+
+const changeQuantity = (button, quantity) => {
+  button.addEventListener("click", (e) => {
+    if (e.target.className.includes("add1-button")) {
+      quantity.innerText++;
+      return sendData(`${allProductsUrl}/${e.target.id}/+`, "PUT");
+    }
+
+    if (e.target.className.includes("reduce1-button")) {
+      if (quantity.innerText >= 1) quantity.innerText--;
+      return sendData(`${allProductsUrl}/${e.target.id}/-`, "PUT");
+    }
+  });
+};
+changeQuantity();
